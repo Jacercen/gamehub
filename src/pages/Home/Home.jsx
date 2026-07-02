@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getGames } from "../../services/gamesService";
-
+import GameGrid from "../../components/GameGrid/GameGrid";
 function Home() {
   const [games, setGames] = useState([]);
-
+  console.log(games);
   useEffect(() => {
     const loadGames = async () => {
       try {
@@ -17,15 +17,7 @@ function Home() {
     loadGames();
   }, []);
 
-  return (
-    <div>
-      <h1>GameHub</h1>
-
-      {games.map((game) => (
-        <p key={game.id}>{game.name}</p>
-      ))}
-    </div>
-  );
+  return <GameGrid games={games} />;
 }
 
 export default Home;
