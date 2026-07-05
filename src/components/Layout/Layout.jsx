@@ -1,13 +1,16 @@
 import NavBar from "../Navbar/NavBar";
 import Header from "../Header/Header";
+import { Outlet } from "react-router-dom";
 import "./Layout.css";
 
-function Layout({ children }) {
+function Layout() {
   return (
     <div className="layout">
       <Header />
       <NavBar />
-      <main className="layout-content">{children}</main>
+      <main className="layout-content">
+        <Outlet />
+      </main>
     </div>
   );
 }

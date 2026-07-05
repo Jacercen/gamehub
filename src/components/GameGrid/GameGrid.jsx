@@ -1,5 +1,5 @@
 import GameCard from "../GameCard/GameCard";
-
+import "./GameGrid.css";
 function GameGrid({ games }) {
   return (
     <div className="game-grid">
