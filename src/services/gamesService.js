@@ -36,3 +36,13 @@ export const getGameById = async (id) => {
     throw error;
   }
 };
+
+export const getGameScreenshots = async (id) => {
+  try {
+    const response = await rawgApi.get(`/games/${id}/screenshots`);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error obteniendo el juego", error);
+    throw error;
+  }
+};

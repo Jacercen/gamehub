@@ -1,0 +1,33 @@
+.game-details-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+.modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: none;
+  border: none;
+  color: white;
+
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.modal-arrow-left {
+  left: 20px;
+}
+
+.modal-arrow-right {
+  right: 20px;
+}
+
+.modal-arrow:hover {
+  color: #cccccc;
+}

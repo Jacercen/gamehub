@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function GameCard({ game }) {
+  console.log(game);
   return (
     <Link to={`/game/${game.id}`} className="game-card-link">
       <article className="game-card">

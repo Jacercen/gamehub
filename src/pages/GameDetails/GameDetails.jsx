@@ -1,18 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getGameById } from "../../services/gamesService";
+import { getGameById, getGameScreenshots } from "../../services/gamesService";
 import { FaStar } from "react-icons/fa";
+import GameScreenshots from "../../components/GameScreenshots/GameScreenshots";
 import "./GameDetails.css";
 
 function GameDetails() {
   const { id } = useParams();
 
   const [game, setGame] = useState(null);
+  const [screenshots, setScreenshots] = useState([]);
 
   const loadGame = useCallback(async () => {
     try {
-      const data = await getGameById(id);
-      setGame(data);
+      const [gameData, screenshotsData] = await Promise.all([
+        getGameById(id),
+        getGameScreenshots(id),
+      ]);
+
+      setGame(gameData);
+      setScreenshots(screenshotsData);
     } catch (error) {
       console.error("Error cargando el juego:", error);
     }
@@ -75,6 +82,7 @@ function GameDetails() {
 
         <p>{game.description_raw}</p>
       </section>
+      <GameScreenshots screenshots={screenshots} />
     </section>
   );
 }

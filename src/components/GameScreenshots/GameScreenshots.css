@@ -1,0 +1,60 @@
+.game-screenshots {
+  margin-top: 2rem;
+}
+
+.game-screenshots h2 {
+  margin-bottom: 1rem;
+}
+
+.screenshots-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.screenshot-image {
+  width: 280px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.screenshot-image:hover {
+  transform: scale(1.03);
+}
+.screenshot-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 2rem;
+}
+
+.modal-image {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+
+  background: none;
+  border: none;
+  color: white;
+
+  font-size: 2.5rem;
+  cursor: pointer;
+}
