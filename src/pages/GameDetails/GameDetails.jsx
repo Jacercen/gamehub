@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGameById, getGameScreenshots } from "../../services/gamesService";
 import { FaStar } from "react-icons/fa";
 import GameScreenshots from "../../components/GameScreenshots/GameScreenshots";
 import "./GameDetails.css";
+import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
 function GameDetails() {
   const { id } = useParams();
@@ -11,23 +12,20 @@ function GameDetails() {
   const [game, setGame] = useState(null);
   const [screenshots, setScreenshots] = useState([]);
 
-  const loadGame = useCallback(async () => {
-    try {
-      const [gameData, screenshotsData] = await Promise.all([
-        getGameById(id),
-        getGameScreenshots(id),
-      ]);
-
-      setGame(gameData);
-      setScreenshots(screenshotsData);
-    } catch (error) {
-      console.error("Error cargando el juego:", error);
-    }
-  }, [id]);
-
   useEffect(() => {
-    loadGame();
-  }, [loadGame]);
+    let active = true;
+    Promise.all([getGameById(id), getGameScreenshots(id)])
+      .then(([gameData, screenshotsData]) => {
+        if (active) {
+          setGame(gameData);
+          setScreenshots(screenshotsData);
+        }
+      })
+      .catch((error) => console.error("Error cargando el juego:", error));
+    return () => {
+      active = false;
+    };
+  }, [id]);
 
   if (!game) {
     return <h2>Cargando...</h2>;
@@ -41,7 +39,7 @@ function GameDetails() {
           alt={game.name}
           className="game-details-image"
         />
-
+        <FavoriteButton gameId={game.id} />
         <div className="game-info">
           <h1 className="game-details-name">{game.name}</h1>
 

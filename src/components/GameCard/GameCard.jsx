@@ -1,9 +1,10 @@
 import "./GameCard.css";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 function GameCard({ game }) {
-  console.log(game);
+  console.log("GAME CARD:", game);
   return (
     <Link to={`/game/${game.id}`} className="game-card-link">
       <article className="game-card">
@@ -12,7 +13,7 @@ function GameCard({ game }) {
           alt={game.name}
           className="game-image"
         />
-
+        <FavoriteButton gameId={game.id} />
         <h2 className="game-name">{game.name}</h2>
         <p className="game-genre">
           {game.genres.map((genre) => genre.name).join(" · ")}
