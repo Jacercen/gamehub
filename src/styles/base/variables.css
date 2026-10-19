@@ -1,0 +1,52 @@
+:root {
+  color-scheme: dark;
+
+  /* Fondos */
+  --bg-primary: #09090b;
+  --bg-secondary: #111114;
+  --bg-card: #18181c;
+  --bg-card-hover: #202025;
+  --bg-elevated: #222228;
+
+  /* Texto */
+  --text-primary: #f4f4f5;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --text-subtle: #71717a;
+
+  /* Acentos */
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-soft: #c4b5fd;
+
+  /* Estados */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #fb7185;
+
+  /* Bordes */
+  --border-color: #27272a;
+  --border-hover: #3f3f46;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Radios */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-full: 999px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.35);
+
+  /* Transiciones */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Distribución */
+  --content-max-width: 1440px;
+  --page-padding: clamp(1rem, 3vw, 2rem);
+}
