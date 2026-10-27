@@ -1,103 +1,67 @@
-# 🎮 GameHub
+# 🎮 GameHub — Video Game Catalog
 
-GameHub es una aplicación web desarrollada con **React** que consume la API pública de **RAWG Video Games Database** para explorar, buscar y consultar información sobre videojuegos.
+A web application built with **React** that uses the [RAWG Video Games Database API](https://rawg.io/apidocs) to explore video games, search for titles, view detailed information, and manage favorites.
 
-El proyecto está desarrollado como una aplicación frontend orientada a practicar una arquitectura organizada, consumo de APIs REST, gestión del estado, React Hooks y buenas prácticas de desarrollo.
+This project was developed to practice modern frontend development, REST API integration, reusable components, state management, and maintainable React architecture.
 
----
+## ✨ Features
 
-## 🚀 Tecnologías utilizadas
+### 🎮 Video Game Catalog
+- Browse video games fetched from the RAWG API.
+- Display reusable game cards with cover images, ratings, release dates, genres, and platforms.
 
-- **React**
-- **Vite**
-- **Axios**
-- **React Router DOM**
-- **React Hooks**
-- **Context API**
-- **React Icons**
-- **CSS3**
-- **RAWG API**
+### 🔎 Search and Sorting
+- Search for games using the RAWG API.
+- Debounced search implemented with a custom React Hook.
+- Sort results by rating, release date, and name.
 
----
+### 📄 Game Details
+- View detailed information about each game.
+- Explore genres, platforms, developers, release dates, ratings, and descriptions.
+- Access official game websites when available.
+- Browse game screenshots.
 
-## ✨ Funcionalidades
+### ⭐ Favorites
+- Add and remove games from favorites.
+- Manage favorite games using React Context API.
+- Persist favorite game IDs in `localStorage`.
 
-### 🎮 Catálogo de videojuegos
+### 🧭 Navigation
+Implemented with React Router DOM.
 
-- Obtención de videojuegos mediante la API de RAWG.
-- Visualización de los juegos mediante tarjetas reutilizables.
-- Información mostrada:
-  - Imagen
-  - Nombre
-  - Valoración
-  - Fecha de lanzamiento
-  - Géneros
-  - Plataformas
+| Route | Description |
+|---|---|
+| `/` | Main game catalog |
+| `/game/:id` | Game details |
+| `/favorites` | Favorite games |
 
-### 🔎 Buscador
+## 🛠️ Tech Stack
 
-Búsqueda de videojuegos utilizando el parámetro `search` de la API de RAWG.
+**Frontend**
+- React
+- JavaScript
+- Vite
+- React Router DOM
+- React Hooks and Context API
+- CSS3
 
-La búsqueda utiliza un **debounce** mediante un Custom Hook para evitar realizar una petición por cada pulsación del usuario.
+**API and Libraries**
+- Axios
+- RAWG Video Games Database API
+- React Icons
 
-### ↕️ Ordenación
+**Development Tools**
+- Git and GitHub
+- npm
 
-Ordenación de los resultados utilizando el parámetro `ordering` de RAWG.
+## 🏗️ Project Architecture
 
-Actualmente permite:
-
-- Mejor valorados
-- Más recientes
-- Más antiguos
-- Nombre A-Z
-- Nombre Z-A
-
-### 📄 Página de detalles
-
-Cada videojuego dispone de una página de información detallada.
-
-Incluye:
-
-- Información general
-- Valoración
-- Géneros
-- Plataformas
-- Desarrolladores
-- Fecha de lanzamiento
-- Página web oficial
-- Descripción
-- Capturas de pantalla
-- Gestión de favoritos
-
-### ⭐ Sistema de favoritos
-
-Los usuarios pueden añadir y eliminar videojuegos de favoritos desde:
-
-- Las tarjetas del catálogo
-- La página de detalles
-
-Los favoritos se gestionan mediante **Context API** y se almacenan en `localStorage`, por lo que permanecen guardados al cerrar o recargar la aplicación.
-
-### 🧭 Navegación
-
-La aplicación utiliza **React Router DOM** para gestionar la navegación entre las diferentes páginas:
-
-- `/` — Catálogo
-- `/game/:id` — Detalles del videojuego
-- `/favorites` — Favoritos
-
----
-
-## 🏗️ Arquitectura del proyecto
-
-El proyecto está organizado separando responsabilidades entre diferentes capas:
+The project follows a modular structure that separates UI components, pages, API communication, and state management.
 
 ```text
 src/
-│
-├── api/                # Configuración de Axios
-│
-├── components/        # Componentes reutilizables
+├── api/                # Axios configuration
+├── components/         # Reusable UI components
 │   ├── FavoriteButton/
 │   ├── Filters/
 │   ├── GameCard/
@@ -105,152 +69,116 @@ src/
 │   ├── GameScreenshots/
 │   ├── Layout/
 │   └── NavBar/
-│
-├── context/            # Contextos globales
-│
-├── hooks/              # Custom Hooks
-│
-├── pages/              # Páginas de la aplicación
+├── context/             # Shared application state
+├── hooks/               # Custom React Hooks
+├── pages/               # Application pages
 │   ├── Favorites/
 │   ├── GameDetails/
 │   └── Home/
-│
-├── routes/             # Configuración de React Router
-│
-├── services/            # Comunicación con la API
-│
-└── styles/              # Estilos globales
+├── routes/              # Routing configuration
+├── services/            # API requests
+└── styles/              # Global styles
 ```
 
-La separación entre **API, servicios, componentes, páginas, hooks y contexto** permite mantener el código organizado y facilita futuras ampliaciones.
+This structure helps separate responsibilities, improve code readability, and make future enhancements easier to maintain.
 
----
+## 🔌 API Integration
 
-## 🔌 Consumo de la API
+GameHub communicates with the RAWG API through Axios.
 
-La comunicación con RAWG se realiza mediante una instancia reutilizable de **Axios**.
+The API layer and service functions separate HTTP requests from UI components and handle operations such as:
 
-La API Key se gestiona mediante variables de entorno para evitar incluirla directamente en el código fuente.
+- Fetching the game catalog.
+- Retrieving individual game details.
+- Loading game screenshots.
+- Searching and sorting game results.
 
-Los servicios se encargan de abstraer las peticiones realizadas a la API.
+The API key is configured through a Vite environment variable.
 
-Ejemplo de operaciones utilizadas:
+## 💾 State Management
 
-- Obtener listado de videojuegos
-- Obtener información detallada de un videojuego
-- Obtener capturas de pantalla
+The application uses React's built-in state management tools according to each feature's needs:
 
----
+- `useState` for local component state.
+- `useEffect` for side effects and asynchronous data loading.
+- Custom Hooks for reusable logic, including debounced search.
+- Context API for shared favorites state.
+- `localStorage` for persisting favorite game IDs across browser sessions.
 
-## 💾 Gestión del estado
+## 🚀 Getting Started
 
-El proyecto utiliza diferentes mecanismos de React dependiendo de la responsabilidad:
+### Prerequisites
 
-- `useState` para estados locales.
-- `useEffect` para efectos y peticiones asíncronas.
-- Custom Hooks para reutilizar lógica.
-- **Context API** para gestionar los favoritos.
-- `localStorage` para persistir los favoritos en el navegador.
+- Node.js and npm.
+- A RAWG API key. See the [RAWG API documentation](https://rawg.io/apidocs).
 
-Los favoritos se almacenan utilizando los IDs de los videojuegos:
+### Installation
 
-```json
-[3328, 4200, 3498]
-```
-
-Posteriormente, la página de favoritos obtiene la información necesaria de esos videojuegos para mostrarlos mediante los componentes existentes.
-
----
-
-## 🛠️ Instalación
-
-### 1. Clonar el repositorio
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/Jacercen/gamehub.git
-```
-
-### 2. Entrar en el proyecto
-
-```bash
 cd gamehub
 ```
 
-### 3. Instalar dependencias
+**2. Install dependencies**
 
 ```bash
 npm install
 ```
 
-### 4. Configurar las variables de entorno
+**3. Configure environment variables**
 
-Crear un archivo `.env` en la raíz del proyecto:
+Create a `.env` file in the project root:
 
 ```env
-VITE_RAWG_API_KEY=TU_API_KEY
+VITE_RAWG_API_KEY=YOUR_API_KEY
 ```
 
-### 5. Ejecutar el proyecto
+Replace `YOUR_API_KEY` with your own RAWG API key.
+
+**4. Start the development server**
 
 ```bash
 npm run dev
 ```
 
-La aplicación estará disponible en la URL que indique Vite, normalmente:
+Open the local URL displayed in your terminal, usually `http://localhost:5173`.
 
-```text
-http://localhost:5173
-```
+**Note:** Never commit your actual `.env` file. A Vite environment variable is exposed in the client-side application, so it must not be treated as a secret. Check the RAWG API terms and key restrictions before publishing or deploying the application.
 
----
+## 📌 Planned Improvements
 
-## 📋 Próximas mejoras
+Potential future enhancements include:
 
-Algunas funcionalidades previstas para futuras versiones:
+- Genre and platform filters.
+- Pagination or infinite scrolling.
+- Skeleton loading states.
+- More robust error handling.
+- Responsive design and accessibility improvements.
+- Request caching and performance optimization.
 
-- Filtros por género
-- Filtros por plataforma
-- Paginación
-- Infinite Scroll
-- Skeleton Loading
-- Gestión y presentación de errores
-- Mejoras de diseño responsive
-- Optimización de peticiones a la API
-- Sistema de caché de videojuegos
-- Mejoras de accesibilidad
+These improvements are planned and may not be implemented yet.
 
----
+## 🎯 What I Learned
 
-## 🎯 Objetivos del proyecto
+Through this project, I have practiced:
 
-GameHub se desarrolla como proyecto práctico para profundizar en:
+- Building reusable React components.
+- Integrating a third-party REST API.
+- Organizing API requests into a separate service layer.
+- Creating and using custom Hooks.
+- Managing shared state with Context API.
+- Persisting application data with `localStorage`.
+- Implementing client-side routing.
+- Structuring a frontend project for maintainability.
 
-- Arquitectura de aplicaciones React
-- Consumo de APIs REST
-- Axios
-- React Hooks
-- Custom Hooks
-- Context API
-- React Router
-- Gestión y persistencia del estado
-- Organización de proyectos frontend
-- Componentización
-- Buenas prácticas de desarrollo
+## 👨‍💻 Author
 
-El proyecto también sirve como base para seguir incorporando funcionalidades y mejorar progresivamente su arquitectura y experiencia de usuario.
+**Jacercen**
+
+[GitHub Profile](https://github.com/Jacercen)
 
 ---
 
-## 📸 API utilizada
-
-**RAWG Video Games Database**
-
-[RAWG API Documentation](https://rawg.io/apidocs?utm_source=chatgpt.com)
-
----
-
-## 👨‍💻 Autor
-
-**Javier Cervera**
-
-Proyecto desarrollado como parte de mi aprendizaje y práctica en desarrollo frontend con React.
+*Built as a personal project to develop my frontend engineering skills and explore modern React development.*
